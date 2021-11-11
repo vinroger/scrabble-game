@@ -1,5 +1,5 @@
-# ctd-1d-game
+# CTD 1D Design Assignment
 
-yayy
+Game by Roger Vincentius Kuswara, and 4 others
 
 © Uncle Frank 2021. All rights reserved.
