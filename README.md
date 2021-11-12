@@ -1,8 +1,9 @@
 # CTD 1D Design Assignment
 
-We make game yey
+Scrabble: The Boat Voyage is a 2-d game coded in Python using Tkinter as the UI.
+The game incorporates a challenging word-guessing game with various difficulties, packed in engaging User-interface.
 
-SC07 Meow Team:
+Made by SC07 Team:
 1. Chai Gien Lyn
 2. Cheong Hao Shaun
 3. Gizelle Lim
@@ -10,4 +11,4 @@ SC07 Meow Team:
 5. Vincentius Roger K
 
 
-©Copyright Uncle Frank 2021. All rights reserved.
+©Copyright Uncle-Frank 2021. All rights reserved.
