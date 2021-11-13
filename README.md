@@ -1,4 +1,4 @@
-# Computational Design Thinking 1D Design Assignment
+# Computational Design Thinking 1D Assignment
 
 Scrabble: The Boat Voyage is a 2-d game coded in Python using Tkinter as the UI.
 The game incorporates a challenging word-guessing game with various difficulties, packed in engaging User-interface.
