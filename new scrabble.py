@@ -3,7 +3,7 @@ import tkinter.ttk as ttk
 import random as ran
 game = Tk()
 game.title("Scrambble")
-game.geometry("800x600")
+game.geometry("800x800")
 list_of_words = [["PYTHON", "MEOW", "FRANK", "HAOSH", "GIZELLE", "LYN"], ["A programming language", "Cat Sound",
                     "u know it", "multi-talented", "poker face", "hard working"]]
 no_of_words = list(range(0,len(list_of_words[0])-1))
@@ -15,40 +15,13 @@ lost_value = -100
 win_value = 100
 
 #lifeline
+global lifeline
 lifeline = ["❤","❤","❤","❤","❤"]
 
-lifeline_label_properties = Label(game, text="Lifeline", font=("Consolas", 15, "bold"),fg="red")
-lifeline_label_properties.pack(padx=35,side=TOP, anchor=NE)
-lifeline_label_properties = Label(game, text="", font=("default",15, "bold"),fg="red")
-lifeline_label_properties.pack(side=TOP, anchor=NE, padx =10)
-
-
-#theme for progress bar
-ttk_style = ttk.Style()
-ttk_style.theme_use('classic')
-ttk_style.configure("red.Horizontal.TProgressbar", foreground='red', background='red')
-
-#Progress Bar
-progress_bar_properties = ttk.Progressbar(game, style="", orient=HORIZONTAL, length=300, mode='determinate')
-progress_bar_properties.pack(pady=(30, 0))
-
-#Progress
-progress = 0
-progress_text = Label(game, text="Progress: " + str(progress) +" %", font=("Consolas", 15))
-progress_text.pack(pady=(0,20))
-
-
-
-
-
-
-
-#scrambled word text properties 
-scrambled_text_properties = Label(game, text="", font=("Consolas", 48))
-scrambled_text_properties.pack(pady=20)
 
 #shuffler
 def mix_words():
+    restart_button.pack_forget()
     hint_text_properties.config(text="")
     ans.delete(0, END)
     ans_text_properties.config(text="")
@@ -84,10 +57,6 @@ def check_answer():
         except:
             pass
 
-        #progress update
-        # progress-=20
-        # progress_bar_properties["value"] = abs(progress)
-        # progress_text.config(text="Progress: " +str(progress) +" %")
         lifeline_check()
         
 
@@ -102,7 +71,7 @@ def lifeline_check():
     lifeline_text = ""
     for i in lifeline:
         lifeline_text += i + " "
-    lifeline_label_properties.config(text= lifeline_text)
+    lifeline_label_properties.config(text="Lifeline\n"+lifeline_text)
 
     if len(lifeline) == 0:
         game_over_lost()
@@ -114,6 +83,8 @@ def game_over_lost():
         widget.pack_forget()
     lose_text_properties = Label(game, text="): Game Over :(", font=("Consolas", 40))
     lose_text_properties.pack(pady=200)
+    restart_button.pack()
+
 
 def game_over_win():
     for widget in game.winfo_children():
@@ -121,10 +92,30 @@ def game_over_win():
     lose_text_properties = Label(game, text="WOOHOOOO\n!!CONGRATSS!!\n:D", font=("Consolas", 40))
     lose_text_properties.pack(pady=200)
 
-def generate_restart():
-    ans_button = Button(button_frame, text="Play Again", command=check_answer)
+def restart():
+    for widget in game.winfo_children():
+        widget.pack_forget()
+    global progress
+    progress = 0
+    global lifeline
+    lifeline = ["❤","❤","❤","❤","❤"]
+    
+    lifeline_label_properties.pack(side=TOP, anchor=NE, padx =10)
+    lifeline_check()
+    progress_bar_properties.pack(pady=(30, 0))
+    progress_text.pack(pady=(0,20))
+    scrambled_text_properties.pack(pady=20)
+    ans.pack(pady=20)
+    button_frame.pack(pady=30)
+    next_button.grid(row=0, column=2, padx=10)
+    hint_button.grid(row=0, column=1, padx=10)
     ans_button.grid(row=0, column=0, padx=10)
-    game.bind('<Return>', lambda event: check_answer())
+    hint_text_properties.pack(pady=20, padx=00)
+    ans_text_properties.pack(pady=20, padx=00)
+    mix_words()
+
+
+
     
     
     
@@ -133,6 +124,30 @@ def generate_restart():
 def hint():
     hint_text_properties.config(text=list_of_words[1][word_no])
 
+# lifeline_label_properties = Label(game, text="Lifeline", font=("Consolas", 15, "bold"),fg="red")
+# lifeline_label_properties.pack(padx=35,side=TOP, anchor=NE)
+lifeline_label_properties = Label(game, text="Lifeline\n", font=("default",15, "bold"),fg="red")
+lifeline_label_properties.pack(side=TOP, anchor=NE, padx =10)
+
+
+#theme for progress bar
+ttk_style = ttk.Style()
+ttk_style.theme_use('classic')
+ttk_style.configure("red.Horizontal.TProgressbar", foreground='red', background='red')
+
+#Progress Bar
+progress_bar_properties = ttk.Progressbar(game, style="", orient=HORIZONTAL, length=300, mode='determinate')
+progress_bar_properties.pack(pady=(30, 0))
+
+#Progress
+progress = 0
+progress_text = Label(game, text="Progress: " + str(progress) +" %", font=("Consolas", 15))
+progress_text.pack(pady=(0,20))
+
+
+#scrambled word text properties 
+scrambled_text_properties = Label(game, text="", font=("Consolas", 48))
+scrambled_text_properties.pack(pady=20)
 
 
 ans = Entry(game, text="", font=("Consolas", 12) )
@@ -156,6 +171,11 @@ hint_text_properties.pack(pady=20, padx=00)
 
 ans_text_properties = Label(game, text="", font=("Consolas", 18))
 ans_text_properties.pack(pady=20, padx=00)
+
+restart_button = Button(game, text="Restart", font=("Consolas", 30), command=restart)
+restart_button.pack(pady =20)
+# game.bind('<Return>', lambda event: restart())
+
 
 lifeline_check()
 mix_words()
