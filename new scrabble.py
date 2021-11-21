@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter.ttk as ttk
 import random as ran
+import time
 game = Tk()
 game.title("Scrambble")
 game.geometry("800x800")
@@ -49,6 +50,7 @@ def check_answer():
         progress_text.config(text="Progress: " +str(progress)+" %")
         check_progress()
         lifeline_check()
+        #time.sleep(1)
         mix_words()
     else:
         ans_text_properties.config(text="oops! You are wrong")
