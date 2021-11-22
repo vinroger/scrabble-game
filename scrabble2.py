@@ -13,16 +13,20 @@ no_of_words = list(range(0,len(list_of_words[0])-1))
 
 #VARIABLES TO TRY
 lost_value = -100
-win_value = 100
+win_value = 50
 
 #lifeline
 global lifeline
 lifeline = ["❤","❤","❤","❤","❤"]
 
+#MOCKERY
+mockery = ["Come on man, one more u die", "You can do it try again!", "WHAT DO U MEANN!", "u can do better!", "meow, ur answer wrong!"]
+
 
 #shuffler
 def mix_words():
-    restart_button.pack_forget()
+    if (progress != win_value) and (len(lifeline) != 0):
+        restart_button.pack_forget()
     hint_text_properties.config(text="")
     ans.delete(0, END)
     ans_text_properties.config(text="")
@@ -39,21 +43,24 @@ def mix_words():
         mixed = mixed+" " + break_word[i]
     scrambled_text_properties.config(text=mixed)
 
+def update_progress_bar():
+    progress_bar_properties["value"] = abs(progress)
+    progress_text.config(text="Progress: " +str(progress)+" %")
+
 def check_answer():
     global progress
     if word == (ans.get()).upper():
-        ans_text_properties.config(text="You are Right!")
+        # ans_text_properties.config(text="You are Right!")
 
         #progress update
         progress+=10
-        progress_bar_properties["value"] = abs(progress)
-        progress_text.config(text="Progress: " +str(progress)+" %")
+        update_progress_bar()
         check_progress()
         lifeline_check()
         #time.sleep(1)
         mix_words()
     else:
-        ans_text_properties.config(text="oops! You are wrong")
+        ans_text_properties.config(text=mockery[len(lifeline)-1])
         try:
             lifeline.pop()
         except:
@@ -93,12 +100,14 @@ def game_over_win():
         widget.pack_forget()
     lose_text_properties = Label(game, text="WOOHOOOO\n!!CONGRATSS!!\n:D", font=("Consolas", 40))
     lose_text_properties.pack(pady=200)
+    restart_button.pack()
 
 def restart():
     for widget in game.winfo_children():
         widget.pack_forget()
     global progress
     progress = 0
+    update_progress_bar()
     global lifeline
     lifeline = ["❤","❤","❤","❤","❤"]
     
@@ -171,7 +180,7 @@ game.bind('<Return>', lambda event: check_answer())
 hint_text_properties = Label(game, text="", font=("Consolas", 18))
 hint_text_properties.pack(pady=20, padx=00)
 
-ans_text_properties = Label(game, text="", font=("Consolas", 18))
+ans_text_properties = Label(game, text="test", font=("Consolas", 18))
 ans_text_properties.pack(pady=20, padx=00)
 
 restart_button = Button(game, text="Restart", font=("Consolas", 30), command=restart)
