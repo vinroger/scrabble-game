@@ -145,7 +145,8 @@ class Game(tk.Tk):
             if self.progress < win_value:
                 self.start_game()
         else:
-
+            for i in range(len(self.answer)):
+                self.undo()
             self.grade.config(text="oops! You are wrong")
             try:
                 self.lifeline.pop()
