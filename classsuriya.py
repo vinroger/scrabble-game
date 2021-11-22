@@ -17,7 +17,7 @@ class Game(tk.Tk):
 
         tk.Tk.__init__(self)
         self.title('Scrabble : The Boat Voyage')
-        self.geometry('600x600')
+        self.geometry('800x800')
         self.progress = 0
         self.question = ""
         self.reset_all_globals()
@@ -31,7 +31,7 @@ class Game(tk.Tk):
 
     def clear_window(self):
         for widget in self.winfo_children():
-            widget.destroy()
+            widget.pack_forget()
 
     def start_game(self):
         self.clear_window()
@@ -110,7 +110,6 @@ class Game(tk.Tk):
         return
 
     def game_over_win(self):
-        print("WINNN")
         self.clear_window()
         win_text_properties = tk.Label(
             self, text="WOOHOOOO\n!!CONGRATSS!!\n:D", font=("Consolas", 40))
@@ -202,7 +201,7 @@ class Game(tk.Tk):
 
         self.next_button = tk.Button(
             self.button_frame, text="Next word", command=self.start_game)
-        self.next_button.grid(row=0, column=2, padx=10)
+        self.next_button.grid(row=0, column=0, padx=10)
 
         self.hint_button = tk.Button(
             self.button_frame, text="Hint", command=self.hint)
@@ -210,7 +209,7 @@ class Game(tk.Tk):
 
         self.ans_button = tk.Button(
             self.button_frame, text="Submit", command=self.check_answer)
-        self.ans_button.grid(row=0, column=0, padx=10)
+        self.ans_button.grid(row=0, column=2, padx=10)
         self.bind('<Return>', lambda event: self.check_answer())
 
         # hint for the question
