@@ -9,7 +9,7 @@ list_description = ["A programming language", "Cat Sound",
 
 font_used = "Consolas"
 pad_config = "pady=20"
-win_value = 20
+win_value = 100
 
 
 class Game(tk.Tk):
@@ -30,15 +30,16 @@ class Game(tk.Tk):
         self.start_game()
 
     def clear_window(self):
-        try:
-            for widget in self.winfo_children():
-                widget.pack_forget()
-        except:
-            return
+        for widget in self.winfo_children():
+            widget.destroy()
 
     def start_game(self):
         self.clear_window()
         self.button_list = []
+        self.question_list = []
+        self.last_button_pressed = []
+        self.last_index_pressed = []
+        self.question = ""
         self.answer = ""
         # generate new question
         randomInteger = random.randint(0, len(list_question)-1)
@@ -48,35 +49,32 @@ class Game(tk.Tk):
         self.generate_elements()
 
     def reset_all_globals(self):
+        self.last_button_pressed = []
+        self.last_index_pressed = []
         self.progress = 0
         self.lifeline = ["❤", "❤", "❤", "❤", "❤"]
         self.question = ""
         self.button_list = []
+        self.question_list = []
         self.answer = ""
 
-    # def undo(self):
-    #     try:
-    #         index_of_undo = self.question_list.index(self.answer[-1])
-    #         self.answer = self.answer[:-1]
-    #         self.button[index_of_undo].grid(
-    #             row=1, column=index_of_undo, padx=5, pady=5)
+    def undo(self):
 
-    #         # Regenerate the Correct or False
-    #         self.grade = ""
-    #         self.generate_grade()
-    #         self.delete_label()
-    #         self.generate_label()
-    #     except:
-    #         return
-    #     return
+        self.last_button_pressed[-1].grid(
+            row=1, column=self.last_index_pressed[-1], padx=5, pady=5
+        )
+        self.last_button_pressed.pop()
+        self.last_index_pressed.pop()
+        self.answer = self.answer[:-1]
+        self.answer_label.config(text=self.answer)
 
-    def assign_letter(self, content, button):
+    def assign_letter(self, content, button, index):
+        self.last_button_pressed.append(button)
+        self.last_index_pressed.append(index)
         self.answer = self.answer + str(content)
         self.answer_label.config(text=self.answer)
         button.grid_forget()
 
-        # if len(self.answer) == len(self.button_list):
-        #     self.check_tf()
         return
 
     def generate_buttons(self):
@@ -89,7 +87,7 @@ class Game(tk.Tk):
 
         for i in range(len(question)):
             self.button_list.append(tk.Button(self.answer_buttons_frame, text=question[i].upper(
-            ), command=lambda idx=i: self.assign_letter(question[idx].upper(), self.button_list[idx])))
+            ), command=lambda idx=i: self.assign_letter(question[idx].upper(), self.button_list[idx], idx)))
             self.button_list[i].grid(row=1, column=i, padx=5, pady=5)
 
     def update_lifeline(self):
@@ -106,13 +104,13 @@ class Game(tk.Tk):
         self.hint_text.config(text=self.question_description)
 
     def check_progress(self):
-        print(self.progress, win_value)
         if self.progress >= win_value:
-            print("WINNN")
+
             self.game_over_win()
         return
 
     def game_over_win(self):
+        print("WINNN")
         self.clear_window()
         win_text_properties = tk.Label(
             self, text="WOOHOOOO\n!!CONGRATSS!!\n:D", font=("Consolas", 40))
@@ -145,8 +143,10 @@ class Game(tk.Tk):
                 text="Progress: " + str(self.progress)+" %")
             self.check_progress()
             self.update_lifeline()
-            self.start_game()
+            if self.progress < win_value:
+                self.start_game()
         else:
+
             self.grade.config(text="oops! You are wrong")
             try:
                 self.lifeline.pop()
@@ -154,6 +154,7 @@ class Game(tk.Tk):
                 pass
 
             self.update_lifeline()
+
         return
 
     def generate_elements(self):
@@ -190,19 +191,10 @@ class Game(tk.Tk):
             font_used, 20), width=20)
         self.answer_label.pack(pady=10)
 
-        # # scrambled word text
-        # self.scrambled_text = tk.Label(
-        #     self, text="", font=("Consolas", 48))
-        # self.scrambled_text.pack(pady=20)
-
-        # #input box for user entry
-        # self.ans_input = tk.Entry(self, text="", font=("Consolas", 12))
-        # self.ans_input.pack(pady=20)
-
         # undo button for
-        # self.undo = tk.Button(self, text="Undo", font=(
-        #     font_used, 15), width=20, command=self.undo)
-        # self.undo.pack(pady=10)
+        self.undo_button = tk.Button(self, text="Undo", font=(
+            font_used, 15), width=15, command=self.undo)
+        self.undo_button.pack(pady=10)
 
         # button frame for submit hint next
         self.button_frame = tk.Frame(self)
