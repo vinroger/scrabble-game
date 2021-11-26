@@ -1,4 +1,4 @@
-# Computational Design Thinking 1D Assignment
+# Computational Design Thinking Challenge
 
 For SUTD Game Design Challenge: "Code a game in python without pip install external modules"
 
