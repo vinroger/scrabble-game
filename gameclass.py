@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import random
+import mainmenu as mainmenu
 
 
 list_question = ["PYTHON", "MEOW", "FRANK", "HAOSH", "GIZELLE", "LYN"]
@@ -18,15 +19,37 @@ class Game(tk.Tk):
         tk.Tk.__init__(self)
         self.title('Scrabble : The Boat Voyage')
         self.geometry('800x800')
-        bg_image = tk.PhotoImage(file="meow.png")
+        # Full Screen
+        self.fullScreenState = True
+        try:
+            self.attributes('-fullscreen', self.fullScreenState)
+            self.bind("<F11>", lambda event: self.attributes(
+                "-fullscreen", not self.attributes("-fullscreen")))
+            self.bind("<Escape>", lambda event: self.attributes(
+                "-fullscreen", False))
+        except:
+            pass
+
+        bg_image = tk.PhotoImage(file="sea.png")
         label = tk.Label(
             self,
             image=bg_image,
         )
-        label.place(x=0, y=0)
+        # self.update()
+        label.pack()
+        label.place(relx=0.5, y=150, anchor="c")
+
+        bg_image2 = tk.PhotoImage(file="boat.png")
+        label2 = tk.Label(
+            self,
+            image=bg_image2,
+        )
+        label2.pack()
+        #label2.place(x=0, y=0)
+
         self.main_frame = tk.Frame(self, height=500, width=800)
 
-        # self.configure(background=bg_image)
+        # self.main_frame.configure(background="white")
         self.progress = 0
         self.question = ""
         self.reset_all_globals()
@@ -137,9 +160,13 @@ class Game(tk.Tk):
     def generate_restart_button(self):
         # restart_button
         self.restart_button = tk.Button(self.main_frame, text="Restart", font=(
-            "Consolas", 30), command=self.restart_everything)
+            "Consolas", 30), command=self.return_to_main_menu)
         self.restart_button.pack(pady=10)
         return
+
+    def return_to_main_menu(self):
+        self.destroy()
+        mainmenu.MainMenu()
 
     def game_over_lost(self):
         self.clear_window()
@@ -241,9 +268,9 @@ class Game(tk.Tk):
         self.grade.pack(pady=10, padx=00)
 
 
-def main():
-    Game()
+# def main():
+#     Game()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
