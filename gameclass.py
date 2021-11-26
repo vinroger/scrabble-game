@@ -30,14 +30,14 @@ class Game(tk.Tk):
         except:
             pass
 
-        bg_image = tk.PhotoImage(file="img/sea.png")
-        label = tk.Label(
+        self.bg_image = tk.PhotoImage(file="img/frame/boat_0_0.png")
+        self.framelabel = tk.Label(
             self,
-            image=bg_image,
+            image=self.bg_image,
         )
         # self.update()
-        label.pack()
-        label.place(relx=0.5, y=150, anchor="c")
+        self.framelabel.pack()
+        self.framelabel.place(relx=0.5, y=150, anchor="c")
 
         # bg_image2 = tk.PhotoImage(file="img/boat.png")
         # label2 = tk.Label(
@@ -132,7 +132,7 @@ class Game(tk.Tk):
             self.button_list[i].grid(row=1, column=i, padx=5, pady=5)
 
     def update_lifeline(self):
-
+        self.check_progress()
         lifeline_text = ""
         for i in self.lifeline:
             lifeline_text += i + " "
@@ -155,6 +155,19 @@ class Game(tk.Tk):
             self.update_hint()
 
     def check_progress(self):
+        framestring = "img/frame/boat_" + \
+            str(int(self.progress/10)) + "_" + \
+            str(5-len(self.lifeline)) + ".png"
+        self.bg_image.config(file=framestring)
+        self.framelabel.config(image=self.bg_image)
+        # = tk.Label(
+        #     self,
+        #     image=self.bg_image,
+        # )
+        # # self.update()
+        # self.label.pack()
+        # self.label.place(relx=0.5, y=150, anchor="c")
+
         if self.progress >= win_value:
 
             self.game_over_win()
@@ -170,7 +183,7 @@ class Game(tk.Tk):
 
     def generate_restart_button(self):
         # restart_button
-        self.restart_button = tk.Button(self.main_frame, text="Restart", font=(
+        self.restart_button = tk.Button(self.main_frame, text="Play Again", font=(
             "Consolas", 20), command=self.return_to_main_menu)
         self.restart_button.pack(pady=10)
         return
@@ -182,7 +195,7 @@ class Game(tk.Tk):
     def game_over_lost(self):
         self.clear_window()
         lose_text_properties = tk.Label(
-            self.main_frame, text="): Game Over :(", font=("Consolas", 40))
+            self.main_frame, text="Nooo my boat sunk...", font=("Consolas", 40))
         lose_text_properties.pack(pady=100)
         self.generate_restart_button()
         return

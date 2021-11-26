@@ -42,6 +42,11 @@ class MainMenu(tk.Tk):
             font_used, 30),
             command=lambda: self.init_game())
         button.pack(pady=padding)
+
+        button = tk.Button(self, text="Quit", font=(
+            font_used, 20),
+            command=lambda: self.destroy())
+        button.pack(pady=padding)
         self.mainloop()
 
     def init_game(self):
