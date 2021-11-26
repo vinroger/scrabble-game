@@ -19,6 +19,7 @@ class Game(tk.Tk):
         tk.Tk.__init__(self)
         self.title('Scrabble : The Boat Voyage')
         self.geometry('800x800')
+        self.iconbitmap('img/favicon.ico')
         # Full Screen
         self.fullScreenState = True
         try:
@@ -176,7 +177,7 @@ class Game(tk.Tk):
     def game_over_win(self):
         self.clear_window()
         win_text_properties = tk.Label(
-            self.main_frame, text="WOOHOOOO\n!!CONGRATSS!!\n:D", font=("Consolas", 20))
+            self.main_frame, text="I made it across safely!\nThanks for your help!\nMeoww <3", font=("Consolas", 20))
         win_text_properties.pack(pady=100)
         self.generate_restart_button()
         return

@@ -15,6 +15,7 @@ class MainMenu(tk.Tk):
         self.title("Scrabble : The Boat Voyage")
         self.configure(background="white")
         self.geometry('800x800')
+        self.iconbitmap('img/favicon.ico')
         # Full Screen
         self.fullScreenState = True
         try:
