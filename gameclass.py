@@ -30,7 +30,7 @@ class Game(tk.Tk):
         except:
             pass
 
-        bg_image = tk.PhotoImage(file="sea.png")
+        bg_image = tk.PhotoImage(file="img/sea.png")
         label = tk.Label(
             self,
             image=bg_image,
@@ -39,12 +39,12 @@ class Game(tk.Tk):
         label.pack()
         label.place(relx=0.5, y=150, anchor="c")
 
-        bg_image2 = tk.PhotoImage(file="boat.png")
-        label2 = tk.Label(
-            self,
-            image=bg_image2,
-        )
-        label2.pack()
+        # bg_image2 = tk.PhotoImage(file="img/boat.png")
+        # label2 = tk.Label(
+        #     self,
+        #     image=bg_image2,
+        # )
+        # label2.pack()
         #label2.place(x=0, y=0)
 
         self.main_frame = tk.Frame(self, height=500, width=800)
@@ -90,6 +90,7 @@ class Game(tk.Tk):
         self.last_index_pressed = []
         self.progress = 0
         self.lifeline = ["❤", "❤", "❤", "❤", "❤"]
+        self.hints = ["💡", "💡", "💡", "💡", "💡"]
         self.question = ""
         self.button_list = []
         self.question_list = []
@@ -127,7 +128,7 @@ class Game(tk.Tk):
 
         for i in range(len(question)):
             self.button_list.append(tk.Button(self.answer_buttons_frame, text=question[i].upper(
-            ), command=lambda idx=i: self.assign_letter(question[idx].upper(), self.button_list[idx], idx)))
+            ), font=("Consolas", 20), command=lambda idx=i: self.assign_letter(question[idx].upper(), self.button_list[idx], idx)))
             self.button_list[i].grid(row=1, column=i, padx=5, pady=5)
 
     def update_lifeline(self):
@@ -140,8 +141,18 @@ class Game(tk.Tk):
         if len(self.lifeline) <= 0:
             self.game_over_lost()
 
+    def update_hint(self):
+
+        hint_text = ""
+        for i in self.hints:
+            hint_text += i + " "
+        self.hint_label.config(text="Hint\n"+hint_text)
+
     def hint(self):
-        self.hint_text.config(text=self.question_description)
+        if len(self.hints) > 0:
+            self.hints.pop()
+            self.hint_text.config(text=self.question_description)
+            self.update_hint()
 
     def check_progress(self):
         if self.progress >= win_value:
@@ -152,7 +163,7 @@ class Game(tk.Tk):
     def game_over_win(self):
         self.clear_window()
         win_text_properties = tk.Label(
-            self.main_frame, text="WOOHOOOO\n!!CONGRATSS!!\n:D", font=("Consolas", 40))
+            self.main_frame, text="WOOHOOOO\n!!CONGRATSS!!\n:D", font=("Consolas", 20))
         win_text_properties.pack(pady=100)
         self.generate_restart_button()
         return
@@ -160,7 +171,7 @@ class Game(tk.Tk):
     def generate_restart_button(self):
         # restart_button
         self.restart_button = tk.Button(self.main_frame, text="Restart", font=(
-            "Consolas", 30), command=self.return_to_main_menu)
+            "Consolas", 20), command=self.return_to_main_menu)
         self.restart_button.pack(pady=10)
         return
 
@@ -202,9 +213,20 @@ class Game(tk.Tk):
         return
 
     def generate_elements(self):
+        self.gridframe = tk.Frame(self.main_frame, width=400)
+        self.gridframe.pack(expand=True)
+        self.hint_label = tk.Label(
+            self.gridframe, text="Hint\n", font=("default", 15, "bold"), fg="orange")
+        self.hint_label.grid(row=0, column=0)
+        self.update_hint()
+
+        self.empty_spaces = tk.Label(
+            self.gridframe, text="                                                                                         ", font=("default", 15, "bold"), fg="red")
+        self.empty_spaces.grid(row=0, column=1)
+
         self.lifeline_label = tk.Label(
-            self.main_frame, text="Lifeline\n", font=("default", 15, "bold"), fg="red")
-        self.lifeline_label.pack(side=tk.TOP, anchor=tk.NE, padx=10)
+            self.gridframe, text="Lifeline\n", font=("default", 15, "bold"), fg="red")
+        self.lifeline_label.grid(row=0, column=2, padx=10)
         self.update_lifeline()
 
         # theme for progress bar
@@ -246,7 +268,7 @@ class Game(tk.Tk):
         self.button_frame.pack(pady=10)
 
         self.next_button = tk.Button(
-            self.button_frame, text="Next word", command=self.start_game)
+            self.button_frame, text="Skip", command=self.start_game)
         self.next_button.grid(row=0, column=0, padx=10)
 
         self.hint_button = tk.Button(

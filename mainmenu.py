@@ -15,7 +15,7 @@ class MainMenu(tk.Tk):
         self.title("Scrabble : The Boat Voyage")
         self.configure(background="white")
         self.geometry('800x800')
-        #Full Screen
+        # Full Screen
         self.fullScreenState = True
         try:
             self.attributes('-fullscreen', self.fullScreenState)
@@ -25,15 +25,13 @@ class MainMenu(tk.Tk):
                 "-fullscreen", False))
         except:
             pass
-        
-        
-        
+
         self.answer_label = tk.Label(self, text="Welcome to Scrabble!", background="white", font=(
             font_used, 20), width=20)
         self.answer_label.pack(pady=padding)
 
         # creating the meow picture
-        bg_image2 = tk.PhotoImage(file="meow3.png")
+        bg_image2 = tk.PhotoImage(file="img/meow3.png")
         label2 = tk.Label(
             self,
             image=bg_image2,
