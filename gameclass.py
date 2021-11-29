@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import random
 import mainmenu as mainmenu
+import storymenu as storymenu
 
 
 list_question = ["PYTHON", "MEOW", "FRANK", "HAOSH", "GIZELLE", "LYN"]
@@ -10,7 +11,26 @@ list_description = ["A programming language", "Cat Sound",
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 100
+win_value = 10
+
+# Importing the CSV file
+f = open("dict/words.csv", "r")
+nest = f.readlines()
+f = open('dict/words.csv', 'r')
+arrayWords = [[] for i in range(3)]
+dictWords = {}
+count = -1
+for line in f:
+    line = line.strip().split(';')
+    if 'SPLITWORD' in line[0]:
+        count += 1
+        continue
+    dictWords[line[0]] = 0
+    arrayWords[count].append([line[0], line[1], line[2]])
+
+easyWords = arrayWords[0]
+mediumWords = arrayWords[1]
+hardWords = arrayWords[2]
 
 
 class Game(tk.Tk):
@@ -51,6 +71,7 @@ class Game(tk.Tk):
         self.main_frame = tk.Frame(self, height=500, width=800)
 
         # self.main_frame.configure(background="white")
+        # self.level = 1
         self.progress = 0
         self.question = ""
         self.reset_all_globals()
@@ -185,8 +206,32 @@ class Game(tk.Tk):
     def generate_restart_button(self):
         # restart_button
         self.restart_button = tk.Button(self.main_frame, text="Play Again", font=(
-            "Consolas", 20), command=self.return_to_main_menu)
+            "Consolas", 20), command=self.go_to_next_level)
         self.restart_button.pack(pady=10)
+        return
+
+    def go_to_next_level(self):
+
+        f = open('level.txt', 'r')
+        a = f.read()
+        level_now = int(a) + 1
+        f.close()
+
+        f = open('level.txt', 'w')
+        f.write(str(level_now))
+        f.close()
+
+        self.destroy()
+        storymenu.StoryMenu()
+
+    def congrats(self):
+        return
+
+    def generate_return_menu_button(self):
+        # restart_button
+        self.return_menu_button = tk.Button(self.main_frame, text="Play Again", font=(
+            "Consolas", 20), command=self.return_to_main_menu)
+        self.return_menu_button.pack(pady=10)
         return
 
     def return_to_main_menu(self):
@@ -198,7 +243,7 @@ class Game(tk.Tk):
         lose_text_properties = tk.Label(
             self.main_frame, text="Nooo my boat sunk...", font=("Consolas", 40))
         lose_text_properties.pack(pady=100)
-        self.generate_restart_button()
+        self.generate_return_menu_button()
         return
 
     def check_answer(self):

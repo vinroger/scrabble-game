@@ -1,6 +1,7 @@
 # import module needed
 import gameclass as gameclass
 import tkinter as tk
+import storymenu as storymenu
 # write the new window function which
 # will be called when button pressed
 
@@ -52,4 +53,4 @@ class MainMenu(tk.Tk):
 
     def init_game(self):
         self.destroy()
-        gameclass.Game()
+        storymenu.StoryMenu()
