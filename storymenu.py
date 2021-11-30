@@ -31,6 +31,7 @@ class StoryMenu(tk.Tk):
         except:
             pass
         self.intro = ""
+
         f = open('level.txt', 'r')
         a = f.read()
         f.close()
@@ -40,15 +41,19 @@ class StoryMenu(tk.Tk):
         #     self.intro = intro_general
         if a == 0:
             self.intro = intro_easy
+            self.image_intro = "img/frame/boat_0_0.png"
         elif a == 1:
             self.intro = intro_med
+            self.image_intro = "img/frame/truck_0_0.png"
         elif a == 2:
             self.intro = intro_hard
+            self.image_intro = "img/frame/boat_0_0.png"
         else:
             # f = open('level.txt', 'w')
             # f.write('1')
             # f.close()
             self.intro = "YOU FINISH THE GAME POGCHAMPPP"
+            self.image_intro = "img/frame/boat_0_0.png"
         # print(self.intro)
         self.answer_label = tk.Label(self, text=self.intro, background="white", font=(
             font_used, 15))
@@ -56,7 +61,7 @@ class StoryMenu(tk.Tk):
 
         # creating the meow picture
 
-        bg_image2 = tk.PhotoImage(file="img/frame/boat_0_0.png")
+        bg_image2 = tk.PhotoImage(file=self.image_intro)
         label2 = tk.Label(
             self,
             image=bg_image2,

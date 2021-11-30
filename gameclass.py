@@ -6,13 +6,9 @@ import storymenu as storymenu
 import reader as reader
 
 
-list_question = []
-list_description = []
-list_category = []
-
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 100
+win_value = 10
 
 # Importing the CSV file
 # f = open("dict/words.csv", "r")
@@ -24,26 +20,11 @@ win_value = 100
 # mediumWords = arrayWords[1]
 # hardWords = arrayWords[2]
 
-# Read what difficulty it is la basically
-f = open('difficulty.txt', 'r')
-difficulty = f.read()
-f.close()
-dictUsed = {}
-if difficulty == "easy":
-    dictUsed = reader.easyWords
-elif difficulty == "medium":
-    dictUsed = reader.mediumWords
-elif difficulty == "hard":
-    dictUsed = reader.hardWords
-else:
-    dictUsed = reader.easyWords
-for i in list(dictUsed.keys()):
-
-    list_question.append(i)
-for i in list(dictUsed.values()):
-
-    list_description.append(i[0])
-    list_category.append(i[1])
+# import the database
+database = reader.wordDatabase()
+list_question = database.getQuestion()
+list_description = database.getDescription()
+list_category = database.getCategory()
 
 
 class Game(tk.Tk):
@@ -112,7 +93,33 @@ class Game(tk.Tk):
         self.question = ""
         self.answer = ""
         # generate new question
-        randomInteger = random.randint(0, len(list_question)-1)
+        randomInteger = random.randint(0, len(database.getQuestion())-1)
+        self.question = list_question[randomInteger]
+        self.question_description = list_description[randomInteger]
+        self.category = list_category[randomInteger]
+
+        # Pop the list element to avoid duplicate questions and then save it to database
+        list_question.pop(randomInteger)
+        list_description.pop(randomInteger)
+        list_category.pop(randomInteger)
+        database.setQuestion(list_question)
+        database.setDescription(list_description)
+        database.setCategory(list_category)
+
+        self.generate_elements()
+        self.main_frame.pack(side="bottom")
+        self.main_frame.pack_propagate(0)
+
+    def start_game_skip(self):
+        self.clear_window()
+        self.button_list = []
+        self.question_list = []
+        self.last_button_pressed = []
+        self.last_index_pressed = []
+        self.question = ""
+        self.answer = ""
+        # generate new question
+        randomInteger = random.randint(0, len(database.getQuestion())-1)
         self.question = list_question[randomInteger]
         self.question_description = list_description[randomInteger]
         self.category = list_category[randomInteger]
@@ -191,7 +198,18 @@ class Game(tk.Tk):
             self.update_hint()
 
     def check_progress(self):
-        framestring = "img/frame/boat_" + \
+        # Read what level is This
+        f = open('level.txt', 'r')
+        level = f.read()
+        f.close()
+        level = int(level)
+        if level == 0:
+            drawing = "boat"
+        elif level == 1:
+            drawing = "truck"
+        else:
+            drawing = "plane"
+        framestring = "img/frame/" + drawing + "_" + \
             str(int(self.progress/10)) + "_" + \
             str(5-len(self.lifeline)) + ".png"
         self.bg_image.config(file=framestring)
@@ -342,7 +360,7 @@ class Game(tk.Tk):
         self.button_frame.pack(pady=10)
 
         self.next_button = tk.Button(
-            self.button_frame, text="Skip", command=self.start_game)
+            self.button_frame, text="Skip", command=self.start_game_skip)
         self.next_button.grid(row=0, column=0, padx=10)
 
         self.hint_button = tk.Button(
