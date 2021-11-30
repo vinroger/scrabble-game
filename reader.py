@@ -10,11 +10,11 @@ for line in f:
         count += 1
         continue
     if count == 1:
-        easyWords[line[0]] = [line[1].replace(" ", ""), line[2]]
+        easyWords[line[0].replace(" ", "")] = [line[1], line[2]]
     elif count == 2:
-        mediumWords[line[0]] = [line[1].replace(" ", ""), line[2]]
+        mediumWords[line[0].replace(" ", "")] = [line[1], line[2]]
     elif count == 3:
-        hardWords[line[0]] = [line[1].replace(" ", ""), line[2]]
+        hardWords[line[0].replace(" ", "")] = [line[1], line[2]]
     else:
         pass
 

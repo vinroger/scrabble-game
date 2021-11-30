@@ -8,7 +8,7 @@ import reader as reader
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 10
+win_value = 100
 
 # Importing the CSV file
 # f = open("dict/words.csv", "r")
@@ -208,7 +208,7 @@ class Game(tk.Tk):
         elif level == 1:
             drawing = "truck"
         else:
-            drawing = "plane"
+            drawing = "boat"
         framestring = "img/frame/" + drawing + "_" + \
             str(int(self.progress/10)) + "_" + \
             str(5-len(self.lifeline)) + ".png"

@@ -1,6 +1,7 @@
 # import module needed
 import gameclass as gameclass
 import tkinter as tk
+import mainmenu as mainmenu
 # write the new window function which
 # will be called when button pressed
 
@@ -49,11 +50,13 @@ class StoryMenu(tk.Tk):
             self.intro = intro_hard
             self.image_intro = "img/frame/boat_0_0.png"
         else:
+            self.return_to_main_menu()
+            return
             # f = open('level.txt', 'w')
             # f.write('1')
             # f.close()
-            self.intro = "YOU FINISH THE GAME POGCHAMPPP"
-            self.image_intro = "img/frame/boat_0_0.png"
+            # self.intro = "YOU FINISH THE GAME POGCHAMPPP"
+            # self.image_intro = "img/frame/boat_0_0.png"
         # print(self.intro)
         self.answer_label = tk.Label(self, text=self.intro, background="white", font=(
             font_used, 15))
@@ -78,6 +81,9 @@ class StoryMenu(tk.Tk):
             command=lambda: self.destroy())
         button.pack()
         self.mainloop()
+
+    def return_to_main_menu(self):
+        self.destroy()
 
     def init_game(self):
         self.destroy()
