@@ -3,34 +3,47 @@ import tkinter.ttk as ttk
 import random
 import mainmenu as mainmenu
 import storymenu as storymenu
+import reader as reader
 
 
-list_question = ["PYTHON", "MEOW", "FRANK", "HAOSH", "GIZELLE", "LYN"]
-list_description = ["A programming language", "Cat Sound",
-                    "u know it", "multi-talented", "poker face", "hard working"]
+list_question = []
+list_description = []
+list_category = []
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 10
+win_value = 100
 
 # Importing the CSV file
-f = open("dict/words.csv", "r")
-nest = f.readlines()
-f = open('dict/words.csv', 'r')
-arrayWords = [[] for i in range(3)]
-dictWords = {}
-count = -1
-for line in f:
-    line = line.strip().split(';')
-    if 'SPLITWORD' in line[0]:
-        count += 1
-        continue
-    dictWords[line[0]] = 0
-    arrayWords[count].append([line[0], line[1], line[2]])
+# f = open("dict/words.csv", "r")
+# nest = f.readlines()
 
-easyWords = arrayWords[0]
-mediumWords = arrayWords[1]
-hardWords = arrayWords[2]
+
+# storing the database to array
+# easyWords = arrayWords[0]
+# mediumWords = arrayWords[1]
+# hardWords = arrayWords[2]
+
+# Read what difficulty it is la basically
+f = open('difficulty.txt', 'r')
+difficulty = f.read()
+f.close()
+dictUsed = {}
+if difficulty == "easy":
+    dictUsed = reader.easyWords
+elif difficulty == "medium":
+    dictUsed = reader.mediumWords
+elif difficulty == "hard":
+    dictUsed = reader.hardWords
+else:
+    dictUsed = reader.easyWords
+for i in list(dictUsed.keys()):
+
+    list_question.append(i)
+for i in list(dictUsed.values()):
+
+    list_description.append(i[0])
+    list_category.append(i[1])
 
 
 class Game(tk.Tk):
@@ -102,6 +115,7 @@ class Game(tk.Tk):
         randomInteger = random.randint(0, len(list_question)-1)
         self.question = list_question[randomInteger]
         self.question_description = list_description[randomInteger]
+        self.category = list_category[randomInteger]
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
@@ -280,7 +294,8 @@ class Game(tk.Tk):
         self.update_hint()
 
         self.empty_spaces = tk.Label(
-            self.gridframe, text="                                                                                         ", font=("default", 15, "bold"), fg="red")
+            self.gridframe, text="                 Category: " + self.category + "                ", font=("Consolas", 15, "bold"), fg="blue", anchor="center")
+        #                                                                                         .
         self.empty_spaces.grid(row=0, column=1)
 
         self.lifeline_label = tk.Label(

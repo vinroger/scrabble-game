@@ -34,9 +34,9 @@ class StoryMenu(tk.Tk):
         f = open('level.txt', 'r')
         a = f.read()
         f.close()
-        # print("a equals to :", a)
         a = int(a)
-        # if a == 0:
+        # print("a equals to :", a)
+        # if a == 0:a
         #     self.intro = intro_general
         if a == 0:
             self.intro = intro_easy
