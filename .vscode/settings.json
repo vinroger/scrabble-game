@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "CourseViz",
+            "database": "C:\\Users\\Zephyrus G14\\OneDrive\\Documents\\GitHub\\courseviz-backend\\db.sqlite3"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

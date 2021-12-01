@@ -45,11 +45,36 @@ class MainMenu(tk.Tk):
             command=lambda: self.init_game())
         button.pack(pady=padding)
 
-        button = tk.Button(self, text="Quit", font=(
+        self.difficulty = "easy"
+
+        self.difficulty_button = tk.Button(self, text="Easy", font=(
+            font_used, 30),
+            command=lambda: self.change_difficulty())
+        self.difficulty_button.pack(pady=padding)
+
+        quit_button = tk.Button(self, text="Quit", font=(
             font_used, 20),
             command=lambda: self.destroy())
-        button.pack(pady=padding)
+        quit_button.pack(pady=padding)
         self.mainloop()
+
+    def change_difficulty(self):
+        if self.difficulty == 'easy':
+            self.difficulty = "medium"
+
+        elif self.difficulty == 'medium':
+            self.difficulty = "hard"
+        elif self.difficulty == "hard":
+            self.difficulty = "easy"
+        else:
+            self.difficulty = "easy"
+        self.update_difficulty()
+
+    def update_difficulty(self):
+        self.difficulty_button.config(text=self.difficulty.capitalize())
+        f = open('difficulty.txt', 'w')
+        f.write(self.difficulty)
+        f.close()
 
     def init_game(self):
         self.destroy()
