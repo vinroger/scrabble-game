@@ -195,10 +195,11 @@ class Game(tk.Tk):
 
     def generate_buttons(self):
         s = self.question
-        lst = list(s)
-        random.shuffle(lst)
-        self.question_list = lst
-        s = ''.join(lst)
+        while s == self.question :
+            lst = list(s)
+            random.shuffle(lst)
+            self.question_list = lst
+            s = ''.join(lst)
         question = s
 
         for i in range(len(question)):
