@@ -45,29 +45,29 @@ for i in list(dictUsed.values()):
     list_category.append(i[1])
 
 
-class wordDatabase():
-    def __init__(self):
-        self.question = list_question
-        self.description = list_description
-        self.category = list_category
+# class wordDatabase():
+#     def __init__(self):
+#         self.question = list_question
+#         self.description = list_description
+#         self.category = list_category
 
-    def getQuestion(self):
-        return self.question
+#     def getQuestion(self):
+#         return self.question
 
-    def getDescription(self):
-        return self.description
+#     def getDescription(self):
+#         return self.description
 
-    def getCategory(self):
-        return self.category
+#     def getCategory(self):
+#         return self.category
 
-    def setQuestion(self, new):
-        self.question = new
+#     def setQuestion(self, new):
+#         self.question = new
 
-    def setDescription(self, new):
-        self.description = new
+#     def setDescription(self, new):
+#         self.description = new
 
-    def setCategory(self, new):
-        self.category = new
+#     def setCategory(self, new):
+#         self.category = new
 
 
 # print(easyWords)

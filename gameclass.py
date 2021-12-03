@@ -4,11 +4,12 @@ import random
 import mainmenu as mainmenu
 import storymenu as storymenu
 import reader as reader
+import game_over_lost as game_over
 
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 10
+win_value = 20
 
 # Importing the CSV file
 # f = open("dict/words.csv", "r")
@@ -21,17 +22,46 @@ win_value = 10
 # hardWords = arrayWords[2]
 
 # import the database
-database = reader.wordDatabase()
+# database = reader.wordDatabase()
 # database.update()
-list_question = database.getQuestion()
-list_description = database.getDescription()
-list_category = database.getCategory()
+
+list_question = []
+list_description = []
+list_category = []
+
+def update_database():
+    f = open('difficulty.txt', 'r')
+    difficulty = f.read()
+    f.close()
+    dictUsed = {}
+    if difficulty == "easy":
+        dictUsed = reader.easyWords
+    elif difficulty == "medium":
+        dictUsed = reader.mediumWords
+    elif difficulty == "hard":
+        dictUsed = reader.hardWords
+    elif difficulty == "asian":
+        dictUsed = reader.asianWords
+    else:
+        dictUsed = reader.easyWords
+    for i in list(dictUsed.keys()):
+        list_question.append(i)
+    for i in list(dictUsed.values()):
+        list_description.append(i[0])
+        list_category.append(i[1])
+
+
+
+# list_question = database.getQuestion()
+# list_description = database.getDescription()
+# list_category = database.getCategory()
 
 
 class Game(tk.Tk):
     def __init__(self):
 
         tk.Tk.__init__(self)
+        update_database()
         self.title('Scrabble : The Boat Voyage')
         self.geometry('800x800')
         self.iconbitmap('img/favicon.ico')
@@ -94,7 +124,7 @@ class Game(tk.Tk):
         self.question = ""
         self.answer = ""
         # generate new question
-        randomInteger = random.randint(0, len(database.getQuestion())-1)
+        randomInteger = random.randint(0, len(list_question)-1)
         self.question = list_question[randomInteger]
         self.question_description = list_description[randomInteger]
         self.category = list_category[randomInteger]
@@ -103,9 +133,10 @@ class Game(tk.Tk):
         list_question.pop(randomInteger)
         list_description.pop(randomInteger)
         list_category.pop(randomInteger)
-        database.setQuestion(list_question)
-        database.setDescription(list_description)
-        database.setCategory(list_category)
+        
+        # database.setQuestion(list_question)
+        # database.setDescription(list_description)
+        # database.setCategory(list_category)
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
@@ -120,7 +151,7 @@ class Game(tk.Tk):
         self.question = ""
         self.answer = ""
         # generate new question
-        randomInteger = random.randint(0, len(database.getQuestion())-1)
+        randomInteger = random.randint(0, len(list_question)-1)
         self.question = list_question[randomInteger]
         self.question_description = list_description[randomInteger]
         self.category = list_category[randomInteger]
@@ -269,7 +300,7 @@ class Game(tk.Tk):
 
     def return_to_main_menu(self):
         self.destroy()
-        mainmenu.MainMenu()
+        game_over.GameOver()
 
     def game_over_lost(self):
         self.clear_window()
