@@ -8,7 +8,7 @@ import reader as reader
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 100
+win_value = 10
 
 # Importing the CSV file
 # f = open("dict/words.csv", "r")
@@ -22,6 +22,7 @@ win_value = 100
 
 # import the database
 database = reader.wordDatabase()
+# database.update()
 list_question = database.getQuestion()
 list_description = database.getDescription()
 list_category = database.getCategory()

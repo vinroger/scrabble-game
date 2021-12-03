@@ -1,7 +1,9 @@
 # import module needed
 import gameclass as gameclass
 import tkinter as tk
-import mainmenu as mainmenu
+
+import game_over as gameover
+
 # write the new window function which
 # will be called when button pressed
 
@@ -50,6 +52,15 @@ class StoryMenu(tk.Tk):
             self.intro = intro_hard
             self.image_intro = "img/frame/boat_0_0.png"
         else:
+            #change a first
+            f = open('level.txt', 'r')
+            a = f.read()
+            level_now = 0
+            f.close()
+
+            f = open('level.txt', 'w')
+            f.write(str(level_now))
+            f.close()
             self.return_to_main_menu()
             return
             # f = open('level.txt', 'w')
@@ -84,6 +95,8 @@ class StoryMenu(tk.Tk):
 
     def return_to_main_menu(self):
         self.destroy()
+        gameover.GameOver()
+        
 
     def init_game(self):
         self.destroy()

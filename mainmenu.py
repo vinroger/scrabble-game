@@ -1,7 +1,8 @@
 # import module needed
-import gameclass as gameclass
+
 import tkinter as tk
 import storymenu as storymenu
+import reader as reader
 # write the new window function which
 # will be called when button pressed
 
@@ -28,8 +29,8 @@ class MainMenu(tk.Tk):
         except:
             pass
 
-        self.answer_label = tk.Label(self, text="Welcome to Scrabble!", background="white", font=(
-            font_used, 20), width=20)
+        self.answer_label = tk.Label(self, text="\nWelcome to Scrabble!", background="white", font=(
+            font_used, 40), width=20)
         self.answer_label.pack(pady=padding)
 
         # creating the meow picture
@@ -47,8 +48,8 @@ class MainMenu(tk.Tk):
 
         self.difficulty = "easy"
 
-        self.difficulty_button = tk.Button(self, text="Easy", font=(
-            font_used, 30),
+        self.difficulty_button = tk.Button(self, text="Difficulty: " + self.difficulty.capitalize(), font=(
+            font_used, 25),
             command=lambda: self.change_difficulty())
         self.difficulty_button.pack(pady=padding)
 
@@ -65,16 +66,21 @@ class MainMenu(tk.Tk):
         elif self.difficulty == 'medium':
             self.difficulty = "hard"
         elif self.difficulty == "hard":
+            self.difficulty = "asian"
+        elif self.difficulty == "asian":
             self.difficulty = "easy"
         else:
             self.difficulty = "easy"
         self.update_difficulty()
 
     def update_difficulty(self):
-        self.difficulty_button.config(text=self.difficulty.capitalize())
+        self.difficulty_button.config(text="Difficulty: " + self.difficulty.capitalize())
         f = open('difficulty.txt', 'w')
         f.write(self.difficulty)
         f.close()
+        # reader.wordDatabase()
+        # reader.wordDatabase.update()
+
 
     def init_game(self):
         self.destroy()

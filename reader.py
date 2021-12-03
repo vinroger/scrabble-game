@@ -3,9 +3,10 @@ f = open('dict/words.csv', 'r')
 easyWords = {}
 mediumWords = {}
 hardWords = {}
+asianWords = {}
 count = 0
 for line in f:
-    line = line.strip().split(';')
+    line = line.strip().split(',')
     if 'SPLITWORD' in line[0]:
         count += 1
         continue
@@ -15,6 +16,8 @@ for line in f:
         mediumWords[line[0].replace(" ", "")] = [line[1], line[2]]
     elif count == 3:
         hardWords[line[0].replace(" ", "")] = [line[1], line[2]]
+    elif count == 4:
+        asianWords[line[0].replace(" ", "")] = [line[1], line[2]]
     else:
         pass
 
@@ -31,6 +34,8 @@ elif difficulty == "medium":
     dictUsed = mediumWords
 elif difficulty == "hard":
     dictUsed = hardWords
+elif difficulty == "asian":
+    dictUsed = asianWords
 else:
     dictUsed = easyWords
 for i in list(dictUsed.keys()):
