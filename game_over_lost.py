@@ -30,8 +30,6 @@ class GameOver(tk.Tk):
         except:
             pass
 
-        
-
         self.answer_label = tk.Label(self, text=congrats, background="white", font=(
             font_used, 30))
         self.answer_label.pack(pady=30)
@@ -40,32 +38,10 @@ class GameOver(tk.Tk):
             font_used, 20))
         self.answer_label.pack(pady=padding)
 
-        # creating the meow picture
-        # bg_image2 = tk.PhotoImage(file="img/meow3.png")
-        # label2 = tk.Label(
-        #     self,
-        #     image=bg_image2,
-        # )
-        # label2.pack(pady=padding)
-
-        # button = tk.Button(self, text="play again la", font=(
-        #     font_used, 30),
-        #     command=lambda: self.init_game())
-        # button.pack(pady=padding)
-
-        # self.mainloop()
         quit_button = tk.Button(self, text="Quit", font=(
             font_used, 20),
             command=self.destroying)
         quit_button.pack(pady=padding)
-        
 
     def destroying(self):
         self.destroy()
-
-
-
-    
-
-    
-

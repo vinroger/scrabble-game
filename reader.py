@@ -43,36 +43,3 @@ for i in list(dictUsed.keys()):
 for i in list(dictUsed.values()):
     list_description.append(i[0])
     list_category.append(i[1])
-
-
-# class wordDatabase():
-#     def __init__(self):
-#         self.question = list_question
-#         self.description = list_description
-#         self.category = list_category
-
-#     def getQuestion(self):
-#         return self.question
-
-#     def getDescription(self):
-#         return self.description
-
-#     def getCategory(self):
-#         return self.category
-
-#     def setQuestion(self, new):
-#         self.question = new
-
-#     def setDescription(self, new):
-#         self.description = new
-
-#     def setCategory(self, new):
-#         self.category = new
-
-
-# print(easyWords)
-# print(mediumWords)
-# print(hardWords)
-
-# for i in list(easyWords.keys()):
-#     print(i)

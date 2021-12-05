@@ -39,9 +39,7 @@ class StoryMenu(tk.Tk):
         a = f.read()
         f.close()
         a = int(a)
-        # print("a equals to :", a)
-        # if a == 0:a
-        #     self.intro = intro_general
+
         if a == 0:
             self.intro = intro_easy
             self.image_intro = "img/frame/boat_0_0.png"
@@ -52,7 +50,7 @@ class StoryMenu(tk.Tk):
             self.intro = intro_hard
             self.image_intro = "img/frame/boat_0_0.png"
         else:
-            #change a first
+            # change a first
             f = open('level.txt', 'r')
             a = f.read()
             level_now = 0
@@ -63,12 +61,7 @@ class StoryMenu(tk.Tk):
             f.close()
             self.return_to_main_menu()
             return
-            # f = open('level.txt', 'w')
-            # f.write('1')
-            # f.close()
-            # self.intro = "YOU FINISH THE GAME POGCHAMPPP"
-            # self.image_intro = "img/frame/boat_0_0.png"
-        # print(self.intro)
+
         self.answer_label = tk.Label(self, text=self.intro, background="white", font=(
             font_used, 15))
         self.answer_label.pack(pady=padding)
@@ -96,7 +89,6 @@ class StoryMenu(tk.Tk):
     def return_to_main_menu(self):
         self.destroy()
         gameover.GameOver()
-        
 
     def init_game(self):
         self.destroy()

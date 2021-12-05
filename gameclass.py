@@ -11,19 +11,6 @@ font_used = "Consolas"
 pad_config = "pady=10"
 win_value = 100
 
-# Importing the CSV file
-# f = open("dict/words.csv", "r")
-# nest = f.readlines()
-
-
-# storing the database to array
-# easyWords = arrayWords[0]
-# mediumWords = arrayWords[1]
-# hardWords = arrayWords[2]
-
-# import the database
-# database = reader.wordDatabase()
-# database.update()
 
 list_question = []
 list_description = []
@@ -52,11 +39,6 @@ def update_database():
         list_category.append(i[1])
 
 
-# list_question = database.getQuestion()
-# list_description = database.getDescription()
-# list_category = database.getCategory()
-
-
 class Game(tk.Tk):
     def __init__(self):
 
@@ -81,22 +63,12 @@ class Game(tk.Tk):
             self,
             image=self.bg_image,
         )
-        # self.update()
+
         self.framelabel.pack()
         self.framelabel.place(relx=0.5, y=150, anchor="c")
 
-        # bg_image2 = tk.PhotoImage(file="img/boat.png")
-        # label2 = tk.Label(
-        #     self,
-        #     image=bg_image2,
-        # )
-        # label2.pack()
-        #label2.place(x=0, y=0)
-
         self.main_frame = tk.Frame(self, height=700, width=1500)
 
-        # self.main_frame.configure(background="white")
-        # self.level = 1
         self.progress = 0
         self.question = ""
         self.reset_all_globals()
@@ -133,10 +105,6 @@ class Game(tk.Tk):
         list_question.pop(randomInteger)
         list_description.pop(randomInteger)
         list_category.pop(randomInteger)
-
-        # database.setQuestion(list_question)
-        # database.setDescription(list_description)
-        # database.setCategory(list_category)
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
@@ -247,13 +215,6 @@ class Game(tk.Tk):
             str(5-len(self.lifeline)) + ".png"
         self.bg_image.config(file=framestring)
         self.framelabel.config(image=self.bg_image)
-        # = tk.Label(
-        #     self,
-        #     image=self.bg_image,
-        # )
-        # # self.update()
-        # self.label.pack()
-        # self.label.place(relx=0.5, y=150, anchor="c")
 
         if self.progress >= win_value:
 
@@ -413,11 +374,3 @@ class Game(tk.Tk):
         self.grade = tk.Label(
             self.main_frame, text="", font=("Consolas", 18))
         self.grade.pack(pady=(10, 120), padx=00)
-
-
-# def main():
-#     Game()
-
-
-# if __name__ == "__main__":
-#     main()

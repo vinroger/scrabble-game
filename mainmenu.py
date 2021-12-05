@@ -74,13 +74,11 @@ class MainMenu(tk.Tk):
         self.update_difficulty()
 
     def update_difficulty(self):
-        self.difficulty_button.config(text="Difficulty: " + self.difficulty.capitalize())
+        self.difficulty_button.config(
+            text="Difficulty: " + self.difficulty.capitalize())
         f = open('difficulty.txt', 'w')
         f.write(self.difficulty)
         f.close()
-        # reader.wordDatabase()
-        # reader.wordDatabase.update()
-
 
     def init_game(self):
         self.destroy()
