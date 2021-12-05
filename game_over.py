@@ -15,7 +15,7 @@ class GameOver(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
 
-        self.title("Scrabble : The Boat Voyage")
+        self.title("Frank's Scrabble Game")
         self.configure(background="white")
         self.geometry('800x800')
         self.iconbitmap('img/favicon.ico')

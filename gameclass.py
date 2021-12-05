@@ -44,7 +44,7 @@ class Game(tk.Tk):
 
         tk.Tk.__init__(self)
         update_database()
-        self.title('Scrabble : The Boat Voyage')
+        self.title("Frank's Scrabble Game")
         self.geometry('800x800')
         self.iconbitmap('img/favicon.ico')
         # sb = tk.Scrollbar(self)
@@ -233,7 +233,7 @@ class Game(tk.Tk):
 
     def generate_restart_button(self):
         # restart_button
-        self.restart_button = tk.Button(self.main_frame, text="Play Again", font=(
+        self.restart_button = tk.Button(self.main_frame, text="Continue", font=(
             "Consolas", 20), command=self.go_to_next_level)
         self.restart_button.pack(pady=10)
         return
@@ -257,7 +257,7 @@ class Game(tk.Tk):
 
     def generate_return_menu_button(self):
         # restart_button
-        self.return_menu_button = tk.Button(self.main_frame, text="Play Again", font=(
+        self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
             "Consolas", 20), command=self.return_to_main_menu)
         self.return_menu_button.pack(pady=10)
         return
