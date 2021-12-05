@@ -9,7 +9,7 @@ import game_over_lost as game_over
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 100
+win_value = 10
 
 
 list_question = []
@@ -67,7 +67,7 @@ class Game(tk.Tk):
         )
 
         self.framelabel.pack()
-        self.framelabel.place(relx=0.5, y=150, anchor="c")
+        self.framelabel.place(relx=0.5, y=130, anchor="c", height=400)
 
         self.main_frame = tk.Frame(self, height=600, width=1500)
 
@@ -203,12 +203,12 @@ class Game(tk.Tk):
     def check_progress(self):
         # Read what level is This
         f = open('level.txt', 'r')
-        level = f.read()
+        self.level = f.read()
         f.close()
-        level = int(level)
-        if level == 0:
+        self.level = int(self.level)
+        if self.level == 0:
             drawing = "boat"
-        elif level == 1:
+        elif self.level == 1:
             drawing = "truck"
         else:
             drawing = "plane"
@@ -268,8 +268,15 @@ class Game(tk.Tk):
 
     def game_over_lost(self):
         self.clear_window()
+        if self.level == 0:
+            drawing = "boat"
+        elif self.level == 1:
+            drawing = "truck"
+        else:
+            drawing = "plane"
+        string = "Nooo my " + drawing + " destroyed..."
         lose_text_properties = tk.Label(
-            self.main_frame, text="Nooo my boat sunk...", font=("Consolas", 40))
+            self.main_frame, text=string, font=("Consolas", 40))
         lose_text_properties.pack(pady=100)
         self.generate_return_menu_button()
         return
@@ -335,7 +342,7 @@ class Game(tk.Tk):
         self.progress_text.pack(pady=(0, 20))
 
         self.answer_buttons_frame = tk.Frame(self.main_frame)
-        self.answer_buttons_frame.pack(pady=10)
+        self.answer_buttons_frame.pack(pady=5)
         # loop through the question and generate buttons
         # scramble the question
 
@@ -343,17 +350,17 @@ class Game(tk.Tk):
 
         self.answer_label = tk.Label(self.main_frame, text=self.answer, font=(
             font_used, 20), width=20)
-        self.answer_label.pack(pady=10)
+        self.answer_label.pack(pady=5)
 
         # undo button for
         self.ans_button = tk.Button(
             self.main_frame, text="Submit", font=(
                 font_used, 15), width=20, command=self.check_answer)
-        self.ans_button.pack(pady=10)
+        self.ans_button.pack(pady=5)
 
         # button frame for submit hint next
         self.button_frame = tk.Frame(self.main_frame)
-        self.button_frame.pack(pady=10)
+        self.button_frame.pack(pady=5)
 
         self.next_button = tk.Button(
             self.button_frame, text="Skip", command=self.start_game_skip)
@@ -371,8 +378,8 @@ class Game(tk.Tk):
         # hint for the question
         self.hint_text = tk.Label(
             self.main_frame, text="", font=("Consolas", 18))
-        self.hint_text.pack(pady=10, padx=00)
+        self.hint_text.pack(pady=5, padx=00)
 
         self.grade = tk.Label(
             self.main_frame, text="", font=("Consolas", 18))
-        self.grade.pack(pady=(10, 50), padx=00)
+        self.grade.pack(pady=(10, 20), padx=00)
