@@ -211,7 +211,7 @@ class Game(tk.Tk):
         elif level == 1:
             drawing = "truck"
         else:
-            drawing = "boat"
+            drawing = "plane"
         framestring = "img/frame/" + drawing + "_" + \
             str(int(self.progress/10)) + "_" + \
             str(5-len(self.lifeline)) + ".png"
