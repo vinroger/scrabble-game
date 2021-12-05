@@ -34,7 +34,7 @@ class MainMenu(tk.Tk):
         self.answer_label.pack(pady=padding)
 
         # creating the meow picture
-        self.bg_image2 = tk.PhotoImage(file="img/meow3.png")
+        self.bg_image2 = tk.PhotoImage(file="img/meow_easy.png")
         self.label2 = tk.Label(
             self,
             image=self.bg_image2,
@@ -74,9 +74,9 @@ class MainMenu(tk.Tk):
         self.update_difficulty()
 
     def update_difficulty(self):
-        # string = "img/meow_" + self.difficulty + ".png"
-        # self.bg_image2.config(file=string)
-        # self.label2.config(image=self.bg_image2)
+        string = "img/meow_" + self.difficulty + ".png"
+        self.bg_image2.config(file=string)
+        self.label2.config(image=self.bg_image2)
 
         self.difficulty_button.config(
             text="Difficulty: " + self.difficulty.capitalize())
