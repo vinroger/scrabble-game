@@ -375,4 +375,4 @@ class Game(tk.Tk):
 
         self.grade = tk.Label(
             self.main_frame, text="", font=("Consolas", 18))
-        self.grade.pack(pady=(10, 100), padx=00)
+        self.grade.pack(pady=(10, 50), padx=00)
