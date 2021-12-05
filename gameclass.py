@@ -9,7 +9,7 @@ import game_over_lost as game_over
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 20
+win_value = 100
 
 # Importing the CSV file
 # f = open("dict/words.csv", "r")
@@ -28,6 +28,7 @@ win_value = 20
 list_question = []
 list_description = []
 list_category = []
+
 
 def update_database():
     f = open('difficulty.txt', 'r')
@@ -49,7 +50,6 @@ def update_database():
     for i in list(dictUsed.values()):
         list_description.append(i[0])
         list_category.append(i[1])
-
 
 
 # list_question = database.getQuestion()
@@ -93,7 +93,7 @@ class Game(tk.Tk):
         # label2.pack()
         #label2.place(x=0, y=0)
 
-        self.main_frame = tk.Frame(self, height=500, width=800)
+        self.main_frame = tk.Frame(self, height=800, width=1500)
 
         # self.main_frame.configure(background="white")
         # self.level = 1
@@ -133,7 +133,7 @@ class Game(tk.Tk):
         list_question.pop(randomInteger)
         list_description.pop(randomInteger)
         list_category.pop(randomInteger)
-        
+
         # database.setQuestion(list_question)
         # database.setDescription(list_description)
         # database.setCategory(list_category)
@@ -195,7 +195,7 @@ class Game(tk.Tk):
 
     def generate_buttons(self):
         s = self.question
-        while s == self.question :
+        while s == self.question:
             lst = list(s)
             random.shuffle(lst)
             self.question_list = lst
