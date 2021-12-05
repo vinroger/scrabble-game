@@ -93,7 +93,7 @@ class Game(tk.Tk):
         # label2.pack()
         #label2.place(x=0, y=0)
 
-        self.main_frame = tk.Frame(self, height=800, width=1500)
+        self.main_frame = tk.Frame(self, height=700, width=1500)
 
         # self.main_frame.configure(background="white")
         # self.level = 1
@@ -412,7 +412,7 @@ class Game(tk.Tk):
 
         self.grade = tk.Label(
             self.main_frame, text="", font=("Consolas", 18))
-        self.grade.pack(pady=10, padx=00)
+        self.grade.pack(pady=(10, 120), padx=00)
 
 
 # def main():
