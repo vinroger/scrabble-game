@@ -211,7 +211,7 @@ class Game(tk.Tk):
         elif level == 1:
             drawing = "truck"
         else:
-            drawing = "boat"
+            drawing = "plane"
         framestring = "img/frame/" + drawing + "_" + \
             str(int(self.progress/10)) + "_" + \
             str(5-len(self.lifeline)) + ".png"
@@ -375,4 +375,4 @@ class Game(tk.Tk):
 
         self.grade = tk.Label(
             self.main_frame, text="", font=("Consolas", 18))
-        self.grade.pack(pady=(10, 100), padx=00)
+        self.grade.pack(pady=(10, 80), padx=00)

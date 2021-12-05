@@ -42,13 +42,13 @@ class StoryMenu(tk.Tk):
 
         if a == 0:
             self.intro = intro_easy
-            self.image_intro = "img/frame/boat_0_0.png"
+            self.image_intro = "img/frame/boat_5_0.png"
         elif a == 1:
             self.intro = intro_med
-            self.image_intro = "img/frame/truck_0_0.png"
+            self.image_intro = "img/frame/truck_5_0.png"
         elif a == 2:
             self.intro = intro_hard
-            self.image_intro = "img/frame/boat_0_0.png"
+            self.image_intro = "img/frame/plane_5_0.png"
         else:
             # change a first
             f = open('level.txt', 'r')
