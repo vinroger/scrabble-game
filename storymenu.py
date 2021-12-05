@@ -63,8 +63,8 @@ class StoryMenu(tk.Tk):
             return
 
         self.answer_label = tk.Label(self, text=self.intro, background="white", font=(
-            font_used, 15))
-        self.answer_label.pack(pady=padding)
+            font_used, 20))
+        self.answer_label.pack(pady=(50, padding))
 
         # creating the meow picture
 
@@ -73,12 +73,12 @@ class StoryMenu(tk.Tk):
             self,
             image=bg_image2,
         )
-        label2.pack(pady=10)
+        label2.pack(pady=padding)
 
         button = tk.Button(self, text="Continue", font=(
             font_used, 30),
             command=lambda: self.init_game())
-        button.pack(pady=10)
+        button.pack(pady=padding)
 
         button = tk.Button(self, text="Quit", font=(
             font_used, 20),
