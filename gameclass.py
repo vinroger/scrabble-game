@@ -47,6 +47,8 @@ class Game(tk.Tk):
         self.title('Scrabble : The Boat Voyage')
         self.geometry('800x800')
         self.iconbitmap('img/favicon.ico')
+        # sb = tk.Scrollbar(self)
+        # sb.pack(side=tk.RIGHT, fill=self.Y)
         # Full Screen
         self.fullScreenState = True
         try:
@@ -67,7 +69,7 @@ class Game(tk.Tk):
         self.framelabel.pack()
         self.framelabel.place(relx=0.5, y=150, anchor="c")
 
-        self.main_frame = tk.Frame(self, height=700, width=1500)
+        self.main_frame = tk.Frame(self, height=600, width=1500)
 
         self.progress = 0
         self.question = ""
@@ -373,4 +375,4 @@ class Game(tk.Tk):
 
         self.grade = tk.Label(
             self.main_frame, text="", font=("Consolas", 18))
-        self.grade.pack(pady=(10, 120), padx=00)
+        self.grade.pack(pady=(10, 100), padx=00)
