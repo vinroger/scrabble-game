@@ -44,7 +44,7 @@ class Game(tk.Tk):
 
         tk.Tk.__init__(self)
         update_database()
-        self.title('Scrabble : The Boat Voyage')
+        self.title("Frank's Scrabble Game")
         self.geometry('800x800')
         self.iconbitmap('img/favicon.ico')
         # sb = tk.Scrollbar(self)
