@@ -47,8 +47,6 @@ class Game(tk.Tk):
         self.title("Frank's Scrabble Game")
         self.geometry('800x800')
         self.iconbitmap('img/favicon.ico')
-        # sb = tk.Scrollbar(self)
-        # sb.pack(side=tk.RIGHT, fill=self.Y)
         # Full Screen
         self.fullScreenState = True
         try:
@@ -68,7 +66,6 @@ class Game(tk.Tk):
 
         self.framelabel.pack()
         self.framelabel.place(relx=0.5, y=130, anchor="c", height=400)
-
         self.main_frame = tk.Frame(self, height=600, width=1500)
 
         self.progress = 0
@@ -79,11 +76,6 @@ class Game(tk.Tk):
         self.main_frame.pack_propagate(0)
 
         self.mainloop()
-
-    def restart_everything(self):
-        self.reset_all_globals()
-
-        self.start_game()
 
     def clear_window(self):
         for widget in self.main_frame.winfo_children():
