@@ -260,16 +260,24 @@ class Game(tk.Tk):
         self.destroy()
         storymenu.StoryMenu()
 
-    def generate_return_menu_button(self):
+    def generate_return_menu_button(self,win=True):
         # restart_button
-        self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
-            "Consolas", 20), command=self.credit_window)
+        if win:
+            self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
+                "Consolas", 20), command=self.credit_window)
+        else:
+            self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
+                "Consolas", 20), command=self.lose_window)
         self.return_menu_button.pack(pady=10)
         return
 
     def credit_window(self):
         self.destroy()
         game_over.GameOver()
+    
+    def lose_window(self):
+        self.destroy()
+        game_over.GameOver(False)
 
     def game_over_lost(self):
         self.clear_window()
@@ -283,7 +291,7 @@ class Game(tk.Tk):
         lose_text_properties = tk.Label(
             self.main_frame, text=string, font=("Consolas", 40))
         lose_text_properties.pack(pady=100)
-        self.generate_return_menu_button()
+        self.generate_return_menu_button(False)
         return
 
     def check_answer(self):
