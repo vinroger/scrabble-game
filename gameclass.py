@@ -258,9 +258,6 @@ class Game(tk.Tk):
         self.destroy()
         storymenu.StoryMenu()
 
-    def congrats(self):
-        return
-
     def generate_return_menu_button(self):
         # restart_button
         self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
