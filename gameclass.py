@@ -9,7 +9,7 @@ import game_over as game_over
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 10
+win_value = 100
 
 
 list_question = []
