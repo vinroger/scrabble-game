@@ -22,6 +22,8 @@ class MainMenu(tk.Tk):
         # Full Screen
         self.fullScreenState = True
         try:
+            # The code for the fullscreen function was taken from the code found at 
+            # https://www.delftstack.com/howto/python-tkinter/how-to-create-full-screen-window-in-tkinter/ 
             self.attributes('-fullscreen', self.fullScreenState)
             self.bind("<F11>", lambda event: self.attributes(
                 "-fullscreen", not self.attributes("-fullscreen")))
