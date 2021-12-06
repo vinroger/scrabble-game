@@ -9,7 +9,7 @@ import game_over_lost as game_over
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 10
+win_value = 30
 
 
 list_question = []
@@ -104,9 +104,11 @@ class Game(tk.Tk):
         self.category = list_category[randomInteger]
 
         # Pop the list element to avoid duplicate questions and then save it to database
-        list_question.pop(randomInteger)
-        list_description.pop(randomInteger)
-        list_category.pop(randomInteger)
+        self.removed_q = list_question.pop(randomInteger)
+        print(self.removed_q, '\n')
+        self.removed_d = list_description.pop(randomInteger)
+        self.removed_c = list_category.pop(randomInteger)
+        print(list_question)
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
@@ -121,10 +123,22 @@ class Game(tk.Tk):
         self.question = ""
         self.answer = ""
         # generate new question
+
+        list_question.append(self.removed_q)
+        list_description.append(self.removed_d)
+        list_category.append(self.removed_c)
+
         randomInteger = random.randint(0, len(list_question)-1)
         self.question = list_question[randomInteger]
         self.question_description = list_description[randomInteger]
         self.category = list_category[randomInteger]
+
+        self.removed_q = list_question.pop(randomInteger)
+        print(self.removed_q, '\n')
+        self.removed_d = list_description.pop(randomInteger)
+        self.removed_c = list_category.pop(randomInteger)
+
+        print(list_question)
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
