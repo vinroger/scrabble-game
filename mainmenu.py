@@ -1,9 +1,8 @@
-# import module needed
-
+# import modules needed
 import tkinter as tk
 import storymenu as storymenu
-import reader as reader
 import game_over as game_over
+
 # write the new window function which
 # will be called when button pressed
 

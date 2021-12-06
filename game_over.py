@@ -1,12 +1,12 @@
-# import module needed
-import gameclass as gameclass
+# import modules needed
 import tkinter as tk
-import mainmenu as mainmenu
+
 # write the new window function which
 # will be called when button pressed
 
 font_used = "Consolas"
 padding = 30
+
 congrats = "\nCongratulations on finishing our game!"
 thanks = "\nThanks for playing our game!"
 devs = "Scrabble Developers:\n\nChai Gien Lyn\nCheong Hao Shaun\nGizelle Lim\nRK Suriya Varshan\nVincentius Roger K"

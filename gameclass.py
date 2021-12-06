@@ -1,16 +1,13 @@
-import tkinter as tk
-import tkinter.ttk as ttk
+# import modules needed
 import random
-import mainmenu as mainmenu
-import storymenu as storymenu
 import reader as reader
 import game_over as game_over
-
+import storymenu as storymenu
+import tkinter as tk
+import tkinter.ttk as ttk
 
 font_used = "Consolas"
-pad_config = "pady=10"
 win_value = 100
-
 
 list_question = []
 list_description = []
@@ -22,6 +19,7 @@ def update_database():
     difficulty = f.read()
     f.close()
     dictUsed = {}
+    # code below chooses the word list based on the difficulty
     if difficulty == "easy":
         dictUsed = reader.easyWords
     elif difficulty == "medium":
@@ -32,6 +30,7 @@ def update_database():
         dictUsed = reader.asianWords
     else:
         dictUsed = reader.easyWords
+    # then adds the different components to the correct arrays
     for i in list(dictUsed.keys()):
         list_question.append(i)
     for i in list(dictUsed.values()):
@@ -65,7 +64,6 @@ class Game(tk.Tk):
             self,
             image=self.bg_image,
         )
-
         self.framelabel.pack()
         self.framelabel.place(relx=0.5, y=130, anchor="c", height=400)
         self.main_frame = tk.Frame(self, height=600, width=1500)
@@ -99,10 +97,8 @@ class Game(tk.Tk):
 
         # Pop the list element to avoid duplicate questions and then save it to database
         self.removed_q = list_question.pop(randomInteger)
-        # print(self.removed_q, '\n')
         self.removed_d = list_description.pop(randomInteger)
         self.removed_c = list_category.pop(randomInteger)
-        # print(list_question)
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
@@ -128,11 +124,8 @@ class Game(tk.Tk):
         self.category = list_category[randomInteger]
 
         self.removed_q = list_question.pop(randomInteger)
-        #print(self.removed_q, '\n')
         self.removed_d = list_description.pop(randomInteger)
         self.removed_c = list_category.pop(randomInteger)
-
-        # print(list_question)
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
@@ -227,7 +220,6 @@ class Game(tk.Tk):
         self.framelabel.config(image=self.bg_image)
 
         if self.progress >= win_value:
-
             self.game_over_win()
         return
 
@@ -263,11 +255,12 @@ class Game(tk.Tk):
     def generate_return_menu_button(self,win=True):
         # restart_button
         if win:
-            self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
-                "Consolas", 20), command=self.credit_window)
+            cmd_used = self.credit_window
         else:
-            self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
-                "Consolas", 20), command=self.lose_window)
+            cmd_used = self.lose_window
+        self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
+                "Consolas", 20), command=cmd_used)
+
         self.return_menu_button.pack(pady=10)
         return
 
@@ -287,7 +280,7 @@ class Game(tk.Tk):
             drawing = "truck"
         else:
             drawing = "plane"
-        string = "Nooo my " + drawing + " destroyed..."
+        string = "Nooo my " + drawing + " is destroyed..."
         lose_text_properties = tk.Label(
             self.main_frame, text=string, font=("Consolas", 40))
         lose_text_properties.pack(pady=100)
@@ -329,7 +322,6 @@ class Game(tk.Tk):
 
         self.empty_spaces = tk.Label(
             self.gridframe, text="                 Category: " + self.category + "                ", font=("Consolas", 15, "bold"), fg="blue", anchor="center")
-        #                                                                                         .
         self.empty_spaces.grid(row=0, column=1)
 
         self.lifeline_label = tk.Label(

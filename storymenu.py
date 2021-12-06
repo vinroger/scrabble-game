@@ -1,6 +1,6 @@
-# import module needed
-import gameclass as gameclass
+# import modules needed
 import tkinter as tk
+import gameclass as gameclass
 import game_over as game_over
 
 # write the new window function which
