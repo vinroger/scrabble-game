@@ -1,7 +1,7 @@
 # import module needed
 import gameclass as gameclass
 import tkinter as tk
-
+import game_over as game_over
 import game_over_lost as game_over_lost
 
 # write the new window function which
@@ -59,7 +59,7 @@ class StoryMenu(tk.Tk):
             f = open('level.txt', 'w')
             f.write(str(level_now))
             f.close()
-            self.return_to_main_menu()
+            self.credit_window_win()
             return
 
         self.answer_label = tk.Label(self, text=self.intro, background="white", font=(
@@ -89,6 +89,10 @@ class StoryMenu(tk.Tk):
     def credit_window(self):
         self.destroy()
         game_over_lost.GameOver()
+
+    def credit_window_win(self):
+        self.destroy()
+        game_over.GameOver()
 
     def init_game(self):
         self.destroy()

@@ -9,7 +9,7 @@ import game_over_lost as game_over
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 30
+win_value = 10
 
 
 list_question = []
@@ -105,10 +105,10 @@ class Game(tk.Tk):
 
         # Pop the list element to avoid duplicate questions and then save it to database
         self.removed_q = list_question.pop(randomInteger)
-        print(self.removed_q, '\n')
+        # print(self.removed_q, '\n')
         self.removed_d = list_description.pop(randomInteger)
         self.removed_c = list_category.pop(randomInteger)
-        print(list_question)
+        # print(list_question)
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
@@ -134,11 +134,11 @@ class Game(tk.Tk):
         self.category = list_category[randomInteger]
 
         self.removed_q = list_question.pop(randomInteger)
-        print(self.removed_q, '\n')
+        #print(self.removed_q, '\n')
         self.removed_d = list_description.pop(randomInteger)
         self.removed_c = list_category.pop(randomInteger)
 
-        print(list_question)
+        # print(list_question)
 
         self.generate_elements()
         self.main_frame.pack(side="bottom")
