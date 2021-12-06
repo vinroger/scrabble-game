@@ -2,13 +2,13 @@
 import gameclass as gameclass
 import tkinter as tk
 
-import game_over as gameover
+import game_over_lost as game_over_lost
 
 # write the new window function which
 # will be called when button pressed
 
 font_used = "Consolas"
-padding = 30
+padding = 20
 intro_general = "Good day Young Adventurer!\n I'm Frank the Cat!\n Let us embark on an adventure together to explore some new terrains.\n There will be 3 adventures,\n you will be given 5 lives and 5 hints for each adventure\n and all you need to do is unscramble the words!\n But beware, if you mispell a word,\n you will lose a life, and that puts us in danger!\nSo, give it your all and \nlet's go have some fun!"
 intro_easy = "Good day Young Adventurer!\n I'm Frank the Cat!\n I got myself into deep trouble\n and I need YOUR help to cross the rough seas.\nYou will be given 5 lives and 5 hints. \nAll you need to do is unscramble the words!\n But beware, if you mispell a word, you will lose a life,\n and that puts us in danger!\nSo, give it your all and let's cross the river together!"
 intro_med = "Phew!\n  Thanks to you, we made it pass those dangerous waters!\n  Unfortunately, I need your help again to \n drive through this treacherous terrain!\n This time, its not going to be as easy as before. \n But I know you can do it!"
@@ -63,8 +63,8 @@ class StoryMenu(tk.Tk):
             return
 
         self.answer_label = tk.Label(self, text=self.intro, background="white", font=(
-            font_used, 20))
-        self.answer_label.pack(pady=(50, padding))
+            font_used, 15))
+        self.answer_label.pack(pady=(20, padding))
 
         # creating the meow picture
 
@@ -82,13 +82,13 @@ class StoryMenu(tk.Tk):
 
         button = tk.Button(self, text="Quit", font=(
             font_used, 20),
-            command=lambda: self.destroy())
+            command=lambda: self.credit_window())
         button.pack()
         self.mainloop()
 
-    def return_to_main_menu(self):
+    def credit_window(self):
         self.destroy()
-        gameover.GameOver()
+        game_over_lost.GameOver()
 
     def init_game(self):
         self.destroy()

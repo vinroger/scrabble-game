@@ -258,11 +258,11 @@ class Game(tk.Tk):
     def generate_return_menu_button(self):
         # restart_button
         self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
-            "Consolas", 20), command=self.return_to_main_menu)
+            "Consolas", 20), command=self.credit_window())
         self.return_menu_button.pack(pady=10)
         return
 
-    def return_to_main_menu(self):
+    def credit_window(self):
         self.destroy()
         game_over.GameOver()
 

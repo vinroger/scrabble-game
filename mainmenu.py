@@ -3,6 +3,7 @@
 import tkinter as tk
 import storymenu as storymenu
 import reader as reader
+import game_over_lost as game_over_lost
 # write the new window function which
 # will be called when button pressed
 
@@ -55,9 +56,13 @@ class MainMenu(tk.Tk):
 
         quit_button = tk.Button(self, text="Quit", font=(
             font_used, 20),
-            command=lambda: self.destroy())
+            command=lambda: self.credit_window())
         quit_button.pack(pady=padding)
         self.mainloop()
+
+    def credit_window(self):
+        self.destroy()
+        game_over_lost.GameOver()
 
     def change_difficulty(self):
         if self.difficulty == 'easy':
