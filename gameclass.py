@@ -9,7 +9,7 @@ import game_over_lost as game_over
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 100
+win_value = 10
 
 
 list_question = []
@@ -104,7 +104,7 @@ class Game(tk.Tk):
         self.category = list_category[randomInteger]
 
         # Pop the list element to avoid duplicate questions and then save it to database
-        self.removed_q = list_question.pop(randomInteger) 
+        self.removed_q = list_question.pop(randomInteger)
         # print(self.removed_q, '\n')
         self.removed_d = list_description.pop(randomInteger)
         self.removed_c = list_category.pop(randomInteger)
@@ -272,7 +272,7 @@ class Game(tk.Tk):
     def generate_return_menu_button(self):
         # restart_button
         self.return_menu_button = tk.Button(self.main_frame, text="Continue", font=(
-            "Consolas", 20), command=self.credit_window())
+            "Consolas", 20), command=self.credit_window)
         self.return_menu_button.pack(pady=10)
         return
 
