@@ -1,0 +1,1 @@
+To run the game, please run the 'executor' python file
