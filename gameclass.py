@@ -9,7 +9,7 @@ import game_over_lost as game_over
 
 font_used = "Consolas"
 pad_config = "pady=10"
-win_value = 10
+win_value = 100
 
 
 list_question = []
@@ -104,7 +104,7 @@ class Game(tk.Tk):
         self.category = list_category[randomInteger]
 
         # Pop the list element to avoid duplicate questions and then save it to database
-        self.removed_q = list_question.pop(randomInteger)
+        self.removed_q = list_question.pop(randomInteger) 
         # print(self.removed_q, '\n')
         self.removed_d = list_description.pop(randomInteger)
         self.removed_c = list_category.pop(randomInteger)
@@ -178,8 +178,8 @@ class Game(tk.Tk):
         return
 
     def generate_buttons(self):
-        s = self.question
-        while s == self.question:
+        s = self.question.upper()
+        while s == self.question.upper():
             lst = list(s)
             random.shuffle(lst)
             self.question_list = lst
