@@ -3,7 +3,7 @@
 import tkinter as tk
 import storymenu as storymenu
 import reader as reader
-import game_over_lost as game_over_lost
+import game_over as game_over
 # write the new window function which
 # will be called when button pressed
 
@@ -64,7 +64,7 @@ class MainMenu(tk.Tk):
 
     def credit_window(self):
         self.destroy()
-        game_over_lost.GameOver()
+        game_over.GameOver(False)
 
     def change_difficulty(self):
         if self.difficulty == 'easy':

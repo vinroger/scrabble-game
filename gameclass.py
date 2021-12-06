@@ -4,7 +4,7 @@ import random
 import mainmenu as mainmenu
 import storymenu as storymenu
 import reader as reader
-import game_over_lost as game_over
+import game_over as game_over
 
 
 font_used = "Consolas"

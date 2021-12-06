@@ -8,11 +8,12 @@ import mainmenu as mainmenu
 font_used = "Consolas"
 padding = 30
 congrats = "\nCongratulations on finishing our game!"
+thanks = "\nThanks for playing our game!"
 devs = "Scrabble Developers:\n\nChai Gien Lyn\nCheong Hao Shaun\nGizelle Lim\nRK Suriya Varshan\nVincentius Roger K"
 
 
 class GameOver(tk.Tk):
-    def __init__(self):
+    def __init__(self,win=True):
         tk.Tk.__init__(self)
 
         self.title("Frank's Scrabble Game")
@@ -31,8 +32,12 @@ class GameOver(tk.Tk):
                 "-fullscreen", False))
         except:
             pass
+        if win:
+            text = congrats
+        else:
+            text = thanks
 
-        self.answer_label = tk.Label(self, text=congrats, background="white", font=(
+        self.answer_label = tk.Label(self, text=text, background="white", font=(
             font_used, 30))
         self.answer_label.pack(pady=30)
 
@@ -47,3 +52,8 @@ class GameOver(tk.Tk):
 
     def destroying(self):
         self.destroy()
+
+
+
+
+
