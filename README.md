@@ -8,7 +8,7 @@ The game incorporates a challenging word-guessing game with various difficulties
 
 ![frank's adventure](https://user-images.githubusercontent.com/12166346/144874630-94c80b8d-e939-453e-9646-e6c6eceb956b.png)
 
-Made by SC07 Team:
+Made by SC02 Group A:
 - Chai Gien Lyn
 - Cheong Hao Shaun
 - Gizelle Lim
