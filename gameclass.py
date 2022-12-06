@@ -7,9 +7,9 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 font_used = "Consolas"
-win_value = 100
+win_value = 10
 
-list_question = []
+list_answer = []
 list_description = []
 list_category = []
 
@@ -32,7 +32,7 @@ def update_database():
         dictUsed = reader.easyWords
     # then adds the different components to the correct arrays
     for i in list(dictUsed.keys()):
-        list_question.append(i)
+        list_answer.append(i)
     for i in list(dictUsed.values()):
         list_description.append(i[0])
         list_category.append(i[1])
@@ -69,7 +69,7 @@ class Game(tk.Tk):
         self.main_frame = tk.Frame(self, height=600, width=1500)
 
         self.progress = 0
-        self.question = ""
+        self.answer = ""
         self.reset_all_globals()
         self.start_game()
         self.main_frame.pack(side="bottom")
@@ -84,19 +84,19 @@ class Game(tk.Tk):
     def start_game(self):
         self.clear_window()
         self.button_list = []
-        self.question_list = []
+        self.answer_list = []
         self.last_button_pressed = []
         self.last_index_pressed = []
-        self.question = ""
         self.answer = ""
-        # generate new question
-        randomInteger = random.randint(0, len(list_question)-1)
-        self.question = list_question[randomInteger]
-        self.question_description = list_description[randomInteger]
+        self.guess = ""
+        # generate new answer
+        randomInteger = random.randint(0, len(list_answer)-1)
+        self.answer = list_answer[randomInteger]
+        self.answer_description = list_description[randomInteger]
         self.category = list_category[randomInteger]
 
-        # Pop the list element to avoid duplicate questions and then save it to database
-        self.removed_q = list_question.pop(randomInteger)
+        # Pop the list element to avoid duplicate answers and then save it to database
+        self.removed_q = list_answer.pop(randomInteger)
         self.removed_d = list_description.pop(randomInteger)
         self.removed_c = list_category.pop(randomInteger)
 
@@ -107,23 +107,23 @@ class Game(tk.Tk):
     def start_game_skip(self):
         self.clear_window()
         self.button_list = []
-        self.question_list = []
+        self.answer_list = []
         self.last_button_pressed = []
         self.last_index_pressed = []
-        self.question = ""
         self.answer = ""
-        # generate new question
+        self.guess = ""
+        # generate new answer
 
-        list_question.append(self.removed_q)
+        list_answer.append(self.removed_q)
         list_description.append(self.removed_d)
         list_category.append(self.removed_c)
 
-        randomInteger = random.randint(0, len(list_question)-1)
-        self.question = list_question[randomInteger]
-        self.question_description = list_description[randomInteger]
+        randomInteger = random.randint(0, len(list_answer)-1)
+        self.answer = list_answer[randomInteger]
+        self.answer_description = list_description[randomInteger]
         self.category = list_category[randomInteger]
 
-        self.removed_q = list_question.pop(randomInteger)
+        self.removed_q = list_answer.pop(randomInteger)
         self.removed_d = list_description.pop(randomInteger)
         self.removed_c = list_category.pop(randomInteger)
 
@@ -137,10 +137,10 @@ class Game(tk.Tk):
         self.progress = 0
         self.lifeline = ["❤", "❤", "❤", "❤", "❤"]
         self.hints = ["💡", "💡", "💡", "💡", "💡"]
-        self.question = ""
-        self.button_list = []
-        self.question_list = []
         self.answer = ""
+        self.button_list = []
+        self.answer_list = []
+        self.guess = ""
 
     def undo(self):
         try:
@@ -149,8 +149,8 @@ class Game(tk.Tk):
             )
             self.last_button_pressed.pop()
             self.last_index_pressed.pop()
-            self.answer = self.answer[:-1]
-            self.answer_label.config(text=self.answer)
+            self.guess = self.guess[:-1]
+            self.guess_label.config(text=self.guess)
             return
         except:
             return
@@ -158,24 +158,24 @@ class Game(tk.Tk):
     def assign_letter(self, content, button, index):
         self.last_button_pressed.append(button)
         self.last_index_pressed.append(index)
-        self.answer = self.answer + str(content)
-        self.answer_label.config(text=self.answer)
+        self.guess = self.guess + str(content)
+        self.guess_label.config(text=self.guess)
         button.grid_forget()
 
         return
 
     def generate_buttons(self):
-        s = self.question.upper()
-        while s == self.question.upper():
+        s = self.answer.upper()
+        while s == self.answer.upper():
             lst = list(s)
             random.shuffle(lst)
-            self.question_list = lst
+            self.answer_list = lst
             s = ''.join(lst)
-        question = s
+        answer = s
 
-        for i in range(len(question)):
-            self.button_list.append(tk.Button(self.answer_buttons_frame, text=question[i].upper(
-            ), font=("Consolas", 20), command=lambda idx=i: self.assign_letter(question[idx].upper(), self.button_list[idx], idx)))
+        for i in range(len(answer)):
+            self.button_list.append(tk.Button(self.guess_buttons_frame, text=answer[i].upper(
+            ), font=("Consolas", 20), command=lambda idx=i: self.assign_letter(answer[idx].upper(), self.button_list[idx], idx)))
             self.button_list[i].grid(row=1, column=i, padx=5, pady=5)
 
     def update_lifeline(self):
@@ -198,7 +198,7 @@ class Game(tk.Tk):
     def hint(self):
         if len(self.hints) > 0:
             self.hints.pop()
-            self.hint_text.config(text=self.question_description)
+            self.hint_text.config(text=self.answer_description)
             self.update_hint()
 
     def check_progress(self):
@@ -287,8 +287,8 @@ class Game(tk.Tk):
         self.generate_return_menu_button(False)
         return
 
-    def check_answer(self):
-        if self.answer == self.question.upper():
+    def check_guess(self):
+        if self.guess == self.answer.upper():
             self.grade.config(text="You are Right!")
             # progress update
             self.progress += 10
@@ -300,7 +300,7 @@ class Game(tk.Tk):
             if self.progress < win_value:
                 self.start_game()
         else:
-            for i in range(len(self.answer)):
+            for i in range(len(self.guess)):
                 self.undo()
             self.grade.config(text="oops! You are wrong")
             try:
@@ -346,21 +346,21 @@ class Game(tk.Tk):
                                       str(self.progress) + " %", font=("Consolas", 15))
         self.progress_text.pack(pady=(0, 20))
 
-        self.answer_buttons_frame = tk.Frame(self.main_frame)
-        self.answer_buttons_frame.pack(pady=5)
-        # loop through the question and generate buttons
-        # scramble the question
+        self.guess_buttons_frame = tk.Frame(self.main_frame)
+        self.guess_buttons_frame.pack(pady=5)
+        # loop through the answer and generate buttons
+        # scramble the answer
 
         self.generate_buttons()
 
-        self.answer_label = tk.Label(self.main_frame, text=self.answer, font=(
+        self.guess_label = tk.Label(self.main_frame, text=self.guess, font=(
             font_used, 20), width=20)
-        self.answer_label.pack(pady=5)
+        self.guess_label.pack(pady=5)
 
         # undo button for
         self.ans_button = tk.Button(
             self.main_frame, text="Submit", font=(
-                font_used, 15), width=20, command=self.check_answer)
+                font_used, 15), width=20, command=self.check_guess)
         self.ans_button.pack(pady=5)
 
         # button frame for submit hint next
@@ -378,9 +378,9 @@ class Game(tk.Tk):
         self.undo_button = tk.Button(
             self.button_frame, text="Undo", command=self.undo)
         self.undo_button.grid(row=0, column=2, padx=10)
-        self.bind('<Return>', lambda event: self.check_answer())
+        self.bind('<Return>', lambda event: self.check_guess())
 
-        # hint for the question
+        # hint for the answer
         self.hint_text = tk.Label(
             self.main_frame, text="", font=("Consolas", 18))
         self.hint_text.pack(pady=5, padx=00)
